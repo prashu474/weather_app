@@ -1,0 +1,26 @@
+<h1>Weather for Zip Code <%= @zip_code %></h1>
+
+<% if flash[:error] %>
+  <p style="color: red;"><%= flash[:error] %></p>
+<% end %>
+
+<h2>Current Weather</h2>
+<p>Temperature: <%= @weather_data['current']['temp_f'] %>°F</p>
+
+<h2>Today's Forecast</h2>
+<% today = @weather_data['forecast']['forecastday'].first['day'] %>
+<p>High: <%= today['maxtemp_f'] %>°F</p>
+<p>Low: <%= today['mintemp_f'] %>°F</p>
+
+<h2>5-Day Forecast</h2>
+<ul>
+  <% @weather_data['forecast']['forecastday'].each do |day| %>
+    <li>
+      <%= Date.parse(day['date']).strftime('%Y-%m-%d') %>:
+      High <%= day['day']['maxtemp_f'] %>°F,
+      Low <%= day['day']['mintemp_f'] %>°F
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Search Again", weather_search_path %>

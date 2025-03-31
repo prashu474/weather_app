@@ -1,0 +1,8 @@
+<h1>Weather Search</h1>
+<%= form_with url: weather_show_path, method: :post, local: true do %>
+  <div>
+    <%= label_tag :zip_code, "Enter your zip code:" %>
+    <%= text_field_tag :zip_code %>
+  </div>
+  <%= submit_tag "Get Weather" %>
+<% end %>
